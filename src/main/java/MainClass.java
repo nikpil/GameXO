@@ -46,39 +46,28 @@ public class MainClass
             System.out.println("Игра закончена");
         }
 
-        public static boolean checkWin(char symb)
-        {
-            if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb)
-            {
+        public static boolean checkWin(char symb) {
+            boolean cols, rows;
+            boolean toright, toleft;
+            toright = true;
+            toleft = true;
+            for (int i = 0; i < SIZE; i++) {
+                toright &= (map[i][i] == symb);
+                toleft &= (map[SIZE - 1][i] == symb);
+            }
+            if (toright || toleft) {
                 return true;
             }
-            if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb)
-            {
-                return true;
-            }
-            if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb)
-            {
-                return true;
-            }
-            if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb)
-            {
-                return true;
-            }
-            if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb)
-            {
-                return true;
-            }
-            if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb)
-            {
-                return true;
-            }
-            if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb)
-            {
-                return true;
-            }
-            if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb)
-            {
-                return true;
+
+            for (int col = 0; col < SIZE; col++) {
+                cols = true;
+                rows = true;
+                for (int row = 0; row < SIZE; row++) {
+                    cols &= (map[col][row] == symb);
+                    rows &= (map[row][col] == symb);
+                }
+                if (cols || rows)
+                    return true;
             }
             return false;
         }
